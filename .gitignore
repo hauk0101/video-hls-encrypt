@@ -1,2 +1,3 @@
 #不需要提交的目录
 .idea/
+app/node_modules/
