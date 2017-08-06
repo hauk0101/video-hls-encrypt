@@ -5,33 +5,48 @@
     <title>Demo</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
     <style>
-        .index-btns{
-            margin-top:100px;
+        .index-btns {
+            margin-top: 100px;
         }
 
     </style>
 </head>
 <body>
-    <h2 align="center">视频加密原型图(HLS + NodeJS + FFmpeg) Demo —— 主页</h2>
-    <div class="index-btns" align="center">
-        <table border="1">
-            <tr>
-                <td>未上传</td>
-                <td><a href="/upload"><button class="button blue">上传视频</button></a></td>
-            </tr>
-            <tr>
-                <td>未加密</td>
-                <td><a href="/encrypt"><button class="button blue">视频加密</button></a></td>
-            </tr>
-            <tr>
-                <td>未登录</td>
-                <td><a href="/login"><button class="button blue">权限登录</button></a></td>
-            </tr>
-            <tr>
-                <td>不可观看</td>
-                <td><a href="/player"><button class="button blue">视频播放</button></a></td>
-            </tr>
-        </table>
-    </div>
+<h2 align="center">视频加密原型图(HLS + NodeJS + FFmpeg) Demo —— 主页</h2>
+<input id="index-data" type="hidden"
+        <% if(data){ %>
+       value="<%=JSON.stringify(data)%>"
+        <% } %>
+>
+
+<div class="index-btns" align="center">
+    <table border="1">
+        <tr>
+            <td id="index-upload-tip">未上传</td>
+            <td><a href="/upload">
+                    <button class="button blue">上传视频</button>
+                </a></td>
+        </tr>
+        <tr>
+            <td>未加密</td>
+            <td><a href="/encrypt">
+                    <button class="button blue">视频加密</button>
+                </a></td>
+        </tr>
+        <tr>
+            <td>未登录</td>
+            <td><a href="/login">
+                    <button class="button blue">权限登录</button>
+                </a></td>
+        </tr>
+        <tr>
+            <td>不可观看</td>
+            <td><a href="/player">
+                    <button class="button blue">视频播放</button>
+                </a></td>
+        </tr>
+    </table>
+</div>
+<script src="javascripts/index.js"></script>
 </body>
 </html>
