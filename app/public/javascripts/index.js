@@ -10,7 +10,7 @@
     var upload_status = document.getElementById('index-upload-tip');
      //如果数据为空，则表示未进行任何操作
     if(input && input.value ==""){
-        console.log('请逐步进行操作');
+
     }else{
         var data = JSON.parse(input.value);
         switch (data.type){

@@ -52,7 +52,4 @@ router.post('/upload-video', function (req, res) {
         console.log(req.file);
     });
 });
-// router.post('/upload-video',upload.single('file'),function(req,res,next){
-//     res.send({a:0});
-// })
 module.exports = router;
