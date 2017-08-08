@@ -11,3 +11,7 @@ TODO LIST
 * 实现七牛加密相关的demo,只需要替代视频自行转码并加密部分
 * 利用node中与FFmpeg相关的第三方插件实现相关需求
 * 美化界面
+
+## ffmpeg命令
+* ffmpeg -i oceans.mp4 -hls_time 10 -hls_key_info_file file.keyinfo stream.m3u8
+* ffmpeg -i oceans.mp4 -c copy -bsf:v h264_mp4toannexb -hls_time 10 -hls_key_info_file file.keyinfo playlist.m3u8

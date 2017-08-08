@@ -1,4 +1,7 @@
 #不需要提交的目录
 .idea/
 app/node_modules/
-
+test/
+app/public/videos
+app/public/images/
+app/public/videos/noencrypt/
