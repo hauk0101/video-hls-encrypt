@@ -12,13 +12,15 @@ TODO LIST
 * 利用node中与FFmpeg相关的第三方插件实现相关需求
 * 美化界面
 
-ffmpeg转mp4为加密后的hls
-ffmpeg -i oceans.mp4 -hls_time 10 -hls_key_info_file key_info.key  ../output/m3u8_encrypt/playlist.m3u8 
+## FFmpeg Command
+* ffmpeg转mp4为加密后的hls
+	```ffmpeg -i oceans.mp4 -hls_time 10 -hls_key_info_file key_info.key  ../output/m3u8_encrypt/playlist.m3u8 
 
-说明： oceans.mp4 为转换前的文件
-       -hls_key_info_file key_info.key 为加密相关的文件设置
-	     key_info.key为同视频同级的key信息文件，其中key_info.key文件包含有2个必要的内容：
-            URI:XXX.key 即在服务器端存放key文件的地址
-            KEY_PATH:即在视频压缩端存放的key文件地址，应该是用作在播放时服务端进行比较时使用，必须与服务端存放的key文件内容一致
-            IV:可选值
-       （暂时只能通过videojs + videojs-contrib-hls进行播放）
+	说明： oceans.mp4 为转换前的文件
+	       -hls_key_info_file key_info.key 为加密相关的文件设置
+		     key_info.key为同视频同级的key信息文件，其中key_info.key文件包含有2个必要的内容：
+		    URI:XXX.key 即在服务器端存放key文件的地址
+		    KEY_PATH:即在视频压缩端存放的key文件地址，应该是用作在播放时服务端进行比较时使用，必须与服务端存放的key文件内容一致
+		    IV:可选值
+	       （暂时只能通过videojs + videojs-contrib-hls进行播放）
+	```
