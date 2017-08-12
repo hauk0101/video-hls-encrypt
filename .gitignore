@@ -4,4 +4,4 @@ app/node_modules/
 test/
 app/public/videos
 app/public/images/
-app/public/videos/noencrypt/
+app/public/videos/
