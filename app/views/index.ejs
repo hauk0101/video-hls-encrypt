@@ -15,7 +15,7 @@
 <h2 align="center">视频加密原型图(HLS + NodeJS + FFmpeg) Demo —— 主页</h2>
 <input id="index-data" type="hidden"
         <% if(data){ %>
-       value="<%=JSON.stringify(data)%>"
+       value="<%= JSON.stringify(data) %>"
         <% } %>
 >
 
@@ -29,9 +29,9 @@
         </tr>
         <tr>
             <td>未加密</td>
-            <td><a href="/encrypt">
-                    <button class="button blue">视频加密</button>
-                </a></td>
+            <td>
+                <button id="index-encrypt-btn" class="button blue">视频加密</button>
+            </td>
         </tr>
         <tr>
             <td>未登录</td>
@@ -47,6 +47,7 @@
         </tr>
     </table>
 </div>
+<script src="javascripts/utils.js"></script>
 <script src="javascripts/index.js"></script>
 </body>
 </html>

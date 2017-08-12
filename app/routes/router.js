@@ -32,6 +32,12 @@ router.get('/login', function (req, res) {
 router.get('/player', function (req, res) {
     res.render('player');
 });
+//视频加密POST请求处理
+router.post('/encrypt',function (req,res) {
+    console.log(req.body);
+    //TODO 检查对应的文件夹是否存在，如果存在则开始执行ffmpeg加密操作，执行完后跳转至对应的index界面并返回参数
+    res.json(req.data);
+});
 //上传视频POST请求处理
 router.post('/upload-video', function (req, res) {
     var _upload = upload.single('file');
@@ -43,8 +49,8 @@ router.post('/upload-video', function (req, res) {
             res.render('index', {
                 data: {
                     type:1,
-                    noencryptPath: req.description,
-                    fileName: req.originalname,
+                    noencryptPath: req.file.destination,
+                    fileName: req.file.originalname,
                     encryptPath: './public/videos/encrypt'
                 }
             });

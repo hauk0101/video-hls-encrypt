@@ -45,3 +45,8 @@ body{
     background: -moz-linear-gradient(top,  #0078a5,  #00adee);
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0078a5', endColorstr='#00adee');
 }
+
+.btn-disable {
+    background: #007ead;
+    color:#0095cc;
+}
