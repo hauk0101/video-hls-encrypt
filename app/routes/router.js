@@ -7,6 +7,7 @@ var express = require('express');
 var router = express.Router();
 
 var upload = require('../controllers/upload');
+var encrypt = require('../controllers/encrypt');
 
 //将默认根目录永久重定向为index路由
 router.get('/', function (req, res, next) {
@@ -35,8 +36,12 @@ router.get('/player', function (req, res) {
 //视频加密POST请求处理
 router.post('/encrypt',function (req,res) {
     console.log(req.body);
+    encrypt(req.body,function(err,data){
+        console.log(err,data);
+
+    });
     //TODO 检查对应的文件夹是否存在，如果存在则开始执行ffmpeg加密操作，执行完后跳转至对应的index界面并返回参数
-    res.json(req.data);
+
 });
 //上传视频POST请求处理
 router.post('/upload-video', function (req, res) {

@@ -14,7 +14,8 @@ TODO LIST
 
 ## FFmpeg Command
 * ffmpeg转mp4为加密后的hls
-	```ffmpeg -i oceans.mp4 -hls_time 10 -hls_key_info_file key_info.key  ../output/m3u8_encrypt/playlist.m3u8 
+	```
+	ffmpeg -i oceans.mp4 -hls_time 10 -hls_key_info_file key_info.key  ../output/m3u8_encrypt/playlist.m3u8 
 
 	说明： oceans.mp4 为转换前的文件
 	       -hls_key_info_file key_info.key 为加密相关的文件设置
@@ -23,4 +24,8 @@ TODO LIST
 		    KEY_PATH:即在视频压缩端存放的key文件地址，应该是用作在播放时服务端进行比较时使用，必须与服务端存放的key文件内容一致
 		    IV:可选值
 	       （暂时只能通过videojs + videojs-contrib-hls进行播放）
+	       
 	```
+	
+## 权限登录
+* 通过权限，最简单的实现cookie和session来允许是否可以访问静态文件

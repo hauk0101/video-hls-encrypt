@@ -1,7 +1,6 @@
 #不需要提交的目录
 .idea/
 app/node_modules/
-test/
-app/public/videos
+test/.*
 app/public/images/
-app/public/videos/
+app/public/videos/.*
