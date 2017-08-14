@@ -77,3 +77,15 @@ function eventBind(obj, eventType, callBack) {
         obj['on' + eventType] = callBack;
     }
 };
+
+//设置对应的按钮可点击状态
+function  setClickable(btn,bool) {
+    if(bool){
+        var reg = new RegExp('(\\s|^)' + 'btn-disable' + '(\\s|$)');
+        btn.className = btn.className.replace(reg,' ');
+        btn.removeAttribute('disabled');
+    }else{
+        btn.className += ' ' + 'btn-disable';
+        btn.setAttribute('disabled','disabled');
+    }
+}

@@ -28,10 +28,10 @@
                 </a></td>
         </tr>
         <tr>
-            <td>未加密</td>
-            <td>
-                <button id="index-encrypt-btn" class="button blue">视频加密</button>
-            </td>
+            <td id="index-encrypt-tip">未加密</td>
+            <td><a href="/encrypt">
+                    <button id="index-encrypt-btn" class="button blue">视频加密</button>
+                </a></td>
         </tr>
         <tr>
             <td>未登录</td>
@@ -47,7 +47,8 @@
         </tr>
     </table>
 </div>
-<script src="javascripts/utils.js"></script>
-<script src="javascripts/index.js"></script>
 </body>
+<script src="javascripts/utils.js"></script>
+<script src="javascripts/socket.io.js"></script>
+<script src="javascripts/index.js"></script>
 </html>

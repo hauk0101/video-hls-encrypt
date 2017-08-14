@@ -3,8 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
+    <style>
+        .index-btns {
+            margin-top: 100px;
+        }
+
+    </style>
 </head>
 <body>
-TODO for encrypt video.
+<h2 align="center">视频加密原型图(HLS + NodeJS + FFmpeg) Demo —— 视频加密</h2>
+<input id="encrypt-btn" type="button" class="button blue" value="加密视频">
+<input id="encrypt-success" type="button" class="button blue" value="继续">
+<input id="encrypt-data" type="hidden"
+        <% if(data){ %>
+       value="<%= JSON.stringify(data) %>"
+        <% } %>
+>
 </body>
+<script src="javascripts/utils.js"></script>
+<script src="javascripts/socket.io.js"></script>
+<script src="javascripts/encrypt.js"></script>
+
 </html>

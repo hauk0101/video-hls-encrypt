@@ -12,7 +12,7 @@ var ffmpegCommand = require('fluent-ffmpeg');
  * @param options 加密相关参数
  * @param callback 加密结果回调
  */
-function encryptHandle(options, callback) {
+function encryptHandle(options,socket, callback) {
     var _name = options.fileName.split('.')[0];
     var _type = options.fileName.split('.')[1];
     var _encryptPath = options.encryptPath + '/' + _name;
@@ -27,11 +27,11 @@ function encryptHandle(options, callback) {
     if(!fs.existsSync(_encryptPath)){
         fs.mkdirSync(_encryptPath);
     };
-    encryptFun(options, callback);
+    encryptFun(options,socket, callback);
     console.log(fs.existsSync(options.encryptPath + '/' + _name));
 }
 
-function encryptFun(options, callback) {
+function encryptFun(options,socket, callback) {
     var _name = options.fileName.split('.')[0];
     var _type = options.fileName.split('.')[1];
     var _encryptPath = options.encryptPath + '/' + _name;
@@ -45,13 +45,16 @@ function encryptFun(options, callback) {
             .addOption('-hls_key_info_file', _keyInfoPath)
             .save(_outputPath)
             .on('end', function () {
-                //TODO 成功压缩后，返回访问地址
+                socket.emit('encrypt-event',{msg:'Encrypt the ' + options.fileName + ' file OK!',type:1});
+
             })
             .on('stderr', function (stderrLine) {
                 console.log('Stderr output: ' + stderrLine);
+                socket.emit('encrypt-event',{msg:stderrLine});
             })
             .on('error', function (err, stdout, stderr) {
                 console.log('Cannot process video: ' + err.message);
+                ocket.emit('encrypt-event',{msg:err.message});
                 callback(err, err.message);
             });
     }

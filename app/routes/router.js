@@ -9,6 +9,8 @@ var router = express.Router();
 var upload = require('../controllers/upload');
 var encrypt = require('../controllers/encrypt');
 
+//websocket io
+var mysocket;
 //将默认根目录永久重定向为index路由
 router.get('/', function (req, res, next) {
     res.redirect(301, '/index');
@@ -23,7 +25,7 @@ router.get('/upload', function (req, res) {
 });
 //加密视频页面
 router.get('/encrypt', function (req, res) {
-    res.render('encrypt');
+    res.send('请先上传视频！');
 });
 //权限登录页面
 router.get('/login', function (req, res) {
@@ -36,13 +38,20 @@ router.get('/player', function (req, res) {
 //视频加密POST请求处理
 router.post('/encrypt',function (req,res) {
     console.log(req.body);
-    encrypt(req.body,function(err,data){
+    //为了表现压缩过程，转发一下视频加密的相关数据
+    encrypt(req.body,mysocket,function(err,data){
         console.log(err,data);
-        res.json(err,data);
     });
-    //TODO 检查对应的文件夹是否存在，如果存在则开始执行ffmpeg加密操作，执行完后跳转至对应的index界面并返回参数
-
 });
+//加密成功后继续
+router.get('/encrypt-success',function(req,res){
+    res.render('index',{
+        data:{
+            type:2
+        }
+    })
+});
+
 //上传视频POST请求处理
 router.post('/upload-video', function (req, res) {
     var _upload = upload.single('file');
@@ -51,8 +60,8 @@ router.post('/upload-video', function (req, res) {
             console.log('上传失败！');
         }
         else {
-            res.render('index', {
-                data: {
+            res.render('encrypt',{
+                data :{
                     type:1,
                     noencryptPath: req.file.destination,
                     fileName: req.file.originalname,
@@ -63,4 +72,11 @@ router.post('/upload-video', function (req, res) {
         console.log(req.file);
     });
 });
-module.exports = router;
+
+module.exports = function(app){
+    io = app.io;
+    app.io.on('connection', function (socket) {
+        mysocket = socket;
+    });
+    return router;
+};
