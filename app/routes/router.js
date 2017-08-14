@@ -38,7 +38,7 @@ router.post('/encrypt',function (req,res) {
     console.log(req.body);
     encrypt(req.body,function(err,data){
         console.log(err,data);
-
+        res.json(err,data);
     });
     //TODO 检查对应的文件夹是否存在，如果存在则开始执行ffmpeg加密操作，执行完后跳转至对应的index界面并返回参数
 

@@ -16,7 +16,7 @@
     //post请求的相关数据
     var postData = {
         encrypt_data: {}
-    }
+    };
 
     //入口
     init();

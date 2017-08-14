@@ -4,11 +4,16 @@
  */
 
 var multer = require('multer');
+var fs = require('fs');
 
 var storage = multer.diskStorage({
     //设置上传后文件路径，如果文件夹路径不存在则会自动创建
     destination: function (req, file, cb) {
-        cb(null,'./public/videos/noencrypt');
+        var _noencryptPath = './public/videos/noencrypt';
+        if(!fs.existsSync(_noencryptPath)){
+            fs.mkdirSync(_noencryptPath);
+        }
+        cb(null,_noencryptPath);
     },
     //重命名上传的文件，并添加后缀
     filename:function(req,file,cb){

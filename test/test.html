@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PC HLS video</title>
+    <link href="http://cdn.bootcss.com/video.js/6.0.0-RC.5/alt/video-js-cdn.min.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>PC 端播放 HLS(<code>.m3u8</code>) 视频</h1>
+<p>借助 video.js 和 videojs-contrib-hls</p>
+<p>由于 videojs-contrib-hls 需要通过 XHR 来获取解析 m3u8 文件, 因此会遭遇跨域问题, 请设置浏览器运行跨域</p>
+
+<video id=example-video width=600 height=300 class="video-js vjs-default-skin" controls>
+    <source
+            src="playlist.m3u8"
+            type="application/x-mpegURL">
+</video>
+<!--<script src="app/public/javascripts/video.js"></script>-->
+<!--<script src="app/public/javascripts/videojs-contrib-hls.min.js"></script>-->
+
+
+<script src="https://vjs.zencdn.net/5.19/video.min.js"></script>
+<!-- PC 端浏览器不支持播放 hls 文件(m3u8), 需要 videojs-contrib-hls 来给我们解码 -->
+<script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+<script>
+    var player = videojs('example-video');
+    player.play();
+</script>
+<!--<script>-->
+    <!--// XMLHttpRequest cannot load http://xxx/video.m3u8. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://192.168.198.98:8000' is therefore not allowed access.-->
+    <!--// 由于 videojs-contrib-hls 需要通过 XHR 来获取解析 m3u8 文件, 因此会遭遇跨域问题, 请设置浏览器运行跨域-->
+    <!--var player = videojs('hls-video');-->
+    <!--player.play();-->
+<!--</script>-->
+</body>
+</html>

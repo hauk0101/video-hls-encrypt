@@ -19,15 +19,15 @@ function encryptHandle(options, callback) {
     var _videoPath = options.noencryptPath + '/' + options.fileName;
     var _keyInfoPath = './public/key/key_info.key';
     var _outputPath = _encryptPath + '/playlist.m3u8';
-    console.log('++', _encryptPath)
-    //创建对应的文件目录
-    if (fs.existsSync(_encryptPath)) {
-        encryptFun(options, callback);
-
-    } else {
+    //如果没有encrypt目录，则创建之
+    if(!fs.existsSync(options.encryptPath)){
+        fs.mkdirSync(options.encryptPath);
+    };
+    //如果没有对应的文件目录，则创建之
+    if(!fs.existsSync(_encryptPath)){
         fs.mkdirSync(_encryptPath);
-        encryptFun(options, callback);
-    }
+    };
+    encryptFun(options, callback);
     console.log(fs.existsSync(options.encryptPath + '/' + _name));
 }
 
