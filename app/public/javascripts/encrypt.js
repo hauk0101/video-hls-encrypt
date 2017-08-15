@@ -8,6 +8,8 @@
     var ecnrypt_input = document.getElementById('encrypt-data');
     var encrypt_btn = document.getElementById('encrypt-btn');
     var success_btn = document.getElementById('encrypt-success');
+    var encrypt_out = document.getElementById('encrypt-out');
+
     var data = JSON.parse(ecnrypt_input.value);
 
     setClickable(success_btn,false);
@@ -34,14 +36,16 @@
     });
     socket.on('encrypt-event',function(data){
         console.log(data.msg);
+        encrypt_out.innerHTML += '<br>' + data.msg;
         if(data.type == 1){
             setClickable(encrypt_btn,true);
         }
     });
     //有待修改
-    // socket.on('error',function(){
-    //    console.log('socket error.');
-    //    socket.close();
-    // });
+    socket.on('connect_error',function(){
+       console.log('socket error.');
+       socket.close();
+    });
+
 
 })();

@@ -31,6 +31,12 @@ function encryptHandle(options,socket, callback) {
     console.log(fs.existsSync(options.encryptPath + '/' + _name));
 }
 
+/**
+ * 加密处理方法
+ * @param options 加密数据的相关参数
+ * @param socket socket输出
+ * @param callback 回调函数
+ */
 function encryptFun(options,socket, callback) {
     var _name = options.fileName.split('.')[0];
     var _type = options.fileName.split('.')[1];
@@ -46,7 +52,6 @@ function encryptFun(options,socket, callback) {
             .save(_outputPath)
             .on('end', function () {
                 socket.emit('encrypt-event',{msg:'Encrypt the ' + options.fileName + ' file OK!',type:1});
-
             })
             .on('stderr', function (stderrLine) {
                 console.log('Stderr output: ' + stderrLine);

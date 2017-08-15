@@ -8,7 +8,14 @@
         .index-btns {
             margin-top: 100px;
         }
-
+        .encrypt-out pre{
+            width: 1000px;
+            margin: 0 auto;
+            height: 100%;
+            border: dashed 1px ;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
     </style>
 </head>
 <body>
@@ -20,6 +27,10 @@
        value="<%= JSON.stringify(data) %>"
         <% } %>
 >
+<div class="encrypt-out" >
+    <p>视频加密日志输出</p>
+    <pre id="encrypt-out" align="left"></pre>
+</div>
 </body>
 <script src="javascripts/utils.js"></script>
 <script src="javascripts/socket.io.js"></script>
