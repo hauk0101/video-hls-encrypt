@@ -9,6 +9,7 @@
     var encrypt_btn = document.getElementById('encrypt-btn');
     var success_btn = document.getElementById('encrypt-success');
     var encrypt_out = document.getElementById('encrypt-out');
+    var encrypt_tip = document.getElementById('encrypt-tip');
 
     var data = JSON.parse(ecnrypt_input.value);
 
@@ -29,19 +30,22 @@
         });
         setClickable(encrypt_btn,false);
     });
+    eventBind(success_btn,'click',function(){
+        window.location.href = '/encrypt-success'
+    })
     //websocket 成功，进行设置
     var socket = io.connect("//localhost:3000");
     socket.on('connection', function (data) {
         console.log('socket connection.');
     });
     socket.on('encrypt-event',function(data){
-        console.log(data.msg);
+        encrypt_out.setAttribute('class','encrypt-out-style');
         encrypt_out.innerHTML += '<br>' + data.msg;
         if(data.type == 1){
-            setClickable(encrypt_btn,true);
+            setClickable(success_btn,true);
+            encrypt_tip.innerHTML='视频加密成功！'
         }
     });
-    //有待修改
     socket.on('connect_error',function(){
        console.log('socket error.');
        socket.close();

@@ -41,6 +41,7 @@ router.post('/encrypt',function (req,res) {
     //为了表现压缩过程，转发一下视频加密的相关数据
     encrypt(req.body,mysocket,function(err,data){
         console.log(err,data);
+        res.send({err:err,data:data});
     });
 });
 //加密成功后继续

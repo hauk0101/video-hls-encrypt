@@ -15,7 +15,15 @@
         //视频加密按钮
         encrypt_btn: document.getElementById('index-encrypt-btn'),
         //视频加密状态的元素
-        encrypt_status:document.getElementById('index-encrypt-tip')
+        encrypt_status: document.getElementById('index-encrypt-tip'),
+        //登录状态提示
+        login_status: document.getElementById('index-login-tip'),
+        //登录按钮
+        login_btn: document.getElementById('index-login-btn'),
+        //可播放状态提示
+        play_status:document.getElementById('index-play-tip'),
+        //视频播放按钮
+        play_btn:document.getElementById('index-play-btn')
     };
     //post请求的相关数据
     var postData = {
@@ -38,7 +46,9 @@
     //元素的状态
     function elementStatus() {
 
-        setClickable(elementOBJ.encrypt_btn,false);
+        setClickable(elementOBJ.encrypt_btn, false);
+        setClickable(elementOBJ.login_btn,false);
+        setClickable(elementOBJ.play_btn,false);
 
         //如果数据为空，则表示未进行任何操作
         if (elementOBJ.index_input && elementOBJ.index_input.value == "") {
@@ -48,10 +58,11 @@
             switch (data.type) {
                 case 1:
                     uploadStatus(true);
-                    setClickable(elementOBJ.encrypt_btn,true);
+                    setClickable(elementOBJ.encrypt_btn, true);
                     break;
                 case 2:
                     encryptStatus(true);
+                    setClickable(elementOBJ.login_btn,true);
                     break;
                 case 3:
                     console.log('已登录');
@@ -86,8 +97,8 @@
         }
 
     }
-    //修改登录状态
 
+    //修改登录状态
 
 
 })();

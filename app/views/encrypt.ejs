@@ -5,10 +5,7 @@
     <title>Demo</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
     <style>
-        .index-btns {
-            margin-top: 100px;
-        }
-        .encrypt-out pre{
+        .encrypt-out-style {
             width: 1000px;
             margin: 0 auto;
             height: 100%;
@@ -27,8 +24,8 @@
        value="<%= JSON.stringify(data) %>"
         <% } %>
 >
-<div class="encrypt-out" >
-    <p>视频加密日志输出</p>
+<div>
+    <p id="encrypt-tip">视频加密日志输出</p>
     <pre id="encrypt-out" align="left"></pre>
 </div>
 </body>
