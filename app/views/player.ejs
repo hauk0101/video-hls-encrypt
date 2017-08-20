@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
+    <style>
+        h5{
+            color: #077cff;
+        }
+    </style>
 </head>
 <body>
-TODO player
+<h2 align="center">视频加密原型图(HLS + NodeJS + FFmpeg) Demo —— 视频播放页面</h2>
+<h5 align="center">播放前请检测视频是否存在，如不存在则无法正常播放！</h5>
+<div class="player-test">
+    <label>输入需要播放的视频名称：</label>
+    <input id="player-name" name="player-name" type="text">
+    <br>
+    <button id="player-test-btn" type="button" class="button blue">检测</button>
+    <button id="player-play-btn" type="button" class="button blue">播放</button>
+</div>
 </body>
+
 </html>

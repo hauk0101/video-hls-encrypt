@@ -49,7 +49,7 @@
         setClickable(elementOBJ.encrypt_btn, false);
         //暂时打开登录
         // setClickable(elementOBJ.login_btn,false);
-        setClickable(elementOBJ.play_btn,false);
+        // setClickable(elementOBJ.play_btn,false);
 
         //如果数据为空，则表示未进行任何操作
         if (elementOBJ.index_input && elementOBJ.index_input.value == "") {
