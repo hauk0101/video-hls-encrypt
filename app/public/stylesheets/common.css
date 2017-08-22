@@ -50,3 +50,7 @@ body{
     background: #007ead;
     color:#0095cc;
 }
+
+.obj-disable{
+    display: none;
+}

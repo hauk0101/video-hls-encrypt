@@ -89,3 +89,13 @@ function  setClickable(btn,bool) {
         btn.setAttribute('disabled','disabled');
     }
 }
+
+//设置元素是否可见
+function setHide(obj,bool){
+    if(bool){
+        var reg = new RegExp('(\\s|^)' + 'obj-disable' + '(\\s|$)');
+        obj.className = obj.className.replace(reg,' ');
+    }else{
+        obj.className += ' ' + 'obj-disable';
+    }
+}

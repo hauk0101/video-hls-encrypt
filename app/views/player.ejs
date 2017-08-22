@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Demo</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
+    <link rel="stylesheet" type="text/css" href="libs/videojs/video-js.min.css">
     <style>
         h5{
             color: #077cff;
@@ -12,7 +13,7 @@
 </head>
 <body>
 <h2 align="center">视频加密原型图(HLS + NodeJS + FFmpeg) Demo —— 视频播放页面</h2>
-<h5 align="center">播放前请检测视频是否存在，如不存在则无法正常播放！</h5>
+<h5 id="player-tip" align="center">播放前请检测视频是否存在，如不存在则无法正常播放！</h5>
 <div class="player-test">
     <label>输入需要播放的视频名称：</label>
     <input id="player-name" name="player-name" type="text">
@@ -20,6 +21,13 @@
     <button id="player-test-btn" type="button" class="button blue">检测</button>
     <button id="player-play-btn" type="button" class="button blue">播放</button>
 </div>
+<div class="player-container obj-disable" id="player-container" align="center">
+    <video id="my-video" class="video-js" width='600' height='300' controls>
+    </video>
+</div>
 </body>
-
+<script src="javascripts/utils.js"></script>
+<script src="libs/videojs/video.min.js"></script>
+<script src="libs/videojs-contrib-hls/videojs-contrib-hls.js"></script>
+<script src="javascripts/player.js"></script>
 </html>

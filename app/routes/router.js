@@ -4,6 +4,7 @@
  */
 
 var express = require('express');
+var fs = require('fs');
 var router = express.Router();
 
 var upload = require('../controllers/upload');
@@ -39,6 +40,19 @@ router.post('/login',function(req,res){
 router.get('/player', function (req, res) {
     res.render('player');
 });
+router.post('/player-name-test',function(req,res){
+    var _exist,_url;
+    var _path = './public/videos/encrypt/' + req.body.player_name;
+    console.log(fs.existsSync(_path));
+    if(fs.existsSync(_path)){
+        _exist = true;
+        _url = 'http://localhost:3000/videos/encrypt/' + req.body.player_name + '/playlist.m3u8'
+    }else{
+        _exist = false;
+    }
+    res.json({exist:_exist,url:_url});
+})
+
 //视频加密POST请求处理
 router.post('/encrypt',function (req,res) {
     console.log(req.body);
