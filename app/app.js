@@ -22,12 +22,27 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 //静态资源访问时的跨域设置
-app.all('*', function(req, res, next) {
+app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     next();
+});
+//静态资源访问限制,
+app.use(function (req, res, next) {
+    var static = /^(\/public|\/key)/g;//设置指定文件目录
+    var suffix = /(\.key)$/g;//后缀格式指定
+    console.log(!req.session);
+    // if (((req.session.username != 'admin') || (req.session.password != 'admin'))
+    //     && (static.test(req.path) && suffix.test(req.path) )) {
+    //     console.log('用户未登录，不允许访问key文件');
+    //     return res.send('请求非法');
+    // }
+    // else {
+    //     console.log('当前用户已登录');
+        next();
+    // }
 });
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -35,21 +50,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', router(app));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

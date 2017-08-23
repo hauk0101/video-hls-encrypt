@@ -35,6 +35,8 @@ router.get('/login', function (req, res) {
 //权限登录处理
 router.post('/login',function(req,res){
     console.log("登录信息：",req.body);
+    req.session.username = req.body.username;
+    req.session.password = req.body.password;
 });
 //视频播放页面
 router.get('/player', function (req, res) {
