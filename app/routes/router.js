@@ -34,7 +34,7 @@ router.get('/login', function (req, res) {
          res.render('login',{data:{code:0,msg:'已登录！'}})
     }
     else{
-        res.render('login');
+        res.render('login',{data:null});
     }
 });
 //权限登录处理
