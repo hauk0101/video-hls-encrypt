@@ -30,11 +30,24 @@ router.get('/encrypt', function (req, res) {
 });
 //权限登录页面
 router.get('/login', function (req, res) {
-    res.render('login');
+    if(req.session.username && req.session.username === 'admin'){
+         res.render('login',{data:{code:0,msg:'已登录！'}})
+    }
+    else{
+        res.render('login');
+    }
 });
 //权限登录处理
 router.post('/login',function(req,res){
     console.log("登录信息：",req.body);
+    var _username = req.body.username;
+    var _password = req.body.password;
+    if(_username === 'admin' && _password === 'admin'){
+        req.session.username = _username;
+        res.json({code:0,msg:'登录成功！'});
+    }else{
+        res.json({code:1,msg:'账号或名密码错误！'});
+    }
     req.session.username = req.body.username;
     req.session.password = req.body.password;
 });

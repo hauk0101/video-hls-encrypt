@@ -7,6 +7,11 @@
 </head>
 <body>
 <h2 align="center">视频加密原型图(HLS + NodeJS + FFmpeg) Demo —— 登录</h2>
+<input id="login-data" type="hidden"
+        <% if(data){ %>
+       value="<%= JSON.stringify(data) %>"
+        <% } %>
+>
 <form method="post"  action="/login">
     <label>用户名：</label>
     <input name="username" type="text">

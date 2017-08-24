@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var session = require('express-session');
 
 var app = express();
 var router = require('./routes/router');
@@ -29,12 +29,19 @@ app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     next();
 });
+//设置session
+app.use(session({
+    name:'video-hls-encrypt',
+    secret:'encrypt',
+    cookie:{
+        maxAge:10 * 1000
+    }
+}));
 //静态资源访问限制,
 app.use(function (req, res, next) {
     var static = /^(\/public|\/key)/g;//设置指定文件目录
     var suffix = /(\.key)$/g;//后缀格式指定
-    console.log(!req.session);
-    // if (((req.session.username != 'admin') || (req.session.password != 'admin'))
+    // if ((req.session.username != 'admin')
     //     && (static.test(req.path) && suffix.test(req.path) )) {
     //     console.log('用户未登录，不允许访问key文件');
     //     return res.send('请求非法');
