@@ -19,6 +19,7 @@ function encryptHandle(options,socket, callback) {
     var _videoPath = options.noencryptPath + '/' + options.fileName;
     var _keyInfoPath = './public/key/key_info.key';
     var _outputPath = _encryptPath + '/playlist.m3u8';
+
     //如果没有encrypt目录，则创建之
     if(!fs.existsSync(options.encryptPath)){
         fs.mkdirSync(options.encryptPath);
@@ -28,7 +29,6 @@ function encryptHandle(options,socket, callback) {
         fs.mkdirSync(_encryptPath);
     };
     encryptFun(options,socket, callback);
-    console.log(fs.existsSync(options.encryptPath + '/' + _name));
 }
 
 /**
@@ -59,7 +59,7 @@ function encryptFun(options,socket, callback) {
             })
             .on('error', function (err, stdout, stderr) {
                 console.log('Cannot process video: ' + err.message);
-                ocket.emit('encrypt-event',{msg:err.message});
+                socket.emit('encrypt-event',{msg:err.message});
                 callback(err, err.message);
             });
     }

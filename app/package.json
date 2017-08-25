@@ -11,6 +11,7 @@
     "debug": "~2.6.3",
     "ejs": "^2.5.7",
     "express": "~4.15.2",
+    "express-session": "^1.15.5",
     "fluent-ffmpeg": "^2.1.2",
     "jade": "~1.11.0",
     "morgan": "~1.8.1",

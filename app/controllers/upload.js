@@ -10,6 +10,11 @@ var storage = multer.diskStorage({
     //设置上传后文件路径，如果文件夹路径不存在则会自动创建
     destination: function (req, file, cb) {
         var _noencryptPath = './public/videos/noencrypt';
+        //如果没有videos目录，则创建之
+        if(!fs.existsSync('./public/videos')){
+            fs.mkdirSync('./public/videos');
+        }
+        //如果没有noencrypt目录，则创建之
         if(!fs.existsSync(_noencryptPath)){
             fs.mkdirSync(_noencryptPath);
         }

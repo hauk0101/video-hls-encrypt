@@ -7,11 +7,22 @@
 </head>
 <body>
 <h2 align="center">视频加密原型图(HLS + NodeJS + FFmpeg) Demo —— 上传视频</h2>
-<form method="post" enctype="multipart/form-data" action="/upload-video">
-    <input type="file" name="file">
+<form method="post" enctype="multipart/form-data" action="/upload-video" onsubmit="return check()">
+    <input id="upload-file" type="file" name="file">
     <input type="submit" class="button blue" value="上传视频">
 </form>
 
-
 </body>
+<script>
+    var upload_file = document.getElementById('upload-file');
+    function check(){
+        console.log(upload_file.value.length);
+        if(upload_file.value.length>0){
+            return true;
+        }else{
+            alert('请选择上传文件！');
+            return false;
+        }
+    }
+</script>
 </html>
