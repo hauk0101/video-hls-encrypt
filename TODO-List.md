@@ -24,6 +24,7 @@ TODO LIST
 		    KEY_PATH:即在视频压缩端存放的key文件地址，应该是用作在播放时服务端进行比较时使用，必须与服务端存放的key文件内容一致
 		    IV:可选值
 	       （暂时只能通过videojs + videojs-contrib-hls进行播放）
+	       需要安装ffmpeg,如果无法正常加密，确保安装了ffmpeg的环境变量，如果依旧不行，可以尝试关机重启
 	       
 	```
 	 

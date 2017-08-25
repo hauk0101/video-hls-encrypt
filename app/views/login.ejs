@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Demo</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
+    <style>
+        h5{
+            color: #077cff;
+        }
+    </style>
 </head>
 <body>
 <h2 align="center">视频加密原型图(HLS + NodeJS + FFmpeg) Demo —— 登录</h2>
@@ -12,20 +17,60 @@
        value="<%= JSON.stringify(data) %>"
         <% } %>
 >
-<form method="post"  action="/login">
+<h5 id="login-tip">登录状态：</h5>
+<form method="post" >
     <label>用户名：</label>
-    <input name="username" type="text">
+    <input id="login-username" name="username" type="text">
     <label>密码：</label>
-    <input name="password" type="password">
+    <input id="login-password" name="password" type="password">
     <br>
-    <button type="submit" class="button blue">登录</button>
-    <button type="button" class="button blue">继续</button>
 </form>
+<button id="login-submit" type="submit" class="button blue">登录</button>
+<button id="login-goon" type="button" class="button blue">继续</button>
 </body>
+<script src="javascripts/utils.js"></script>
 <script>
     //为了方便起见，直接将逻辑写在页面中
-
-
+    var login_data = document.getElementById('login-data');
+    var login_username = document.getElementById('login-username');
+    var login_password = document.getElementById('login-password');
+    var login_submit = document.getElementById('login-submit');
+    var login_goon = document.getElementById('login-goon');
+    var login_tip = document.getElementById('login-tip');
+    if(login_data.value != ""){
+        setClickable(login_username,false);
+        setClickable(login_password,false);
+        setClickable(login_submit,false);
+        login_tip.innerHTML='登录状态：已登录！';
+        setClickable(login_goon,true);
+    }else{
+        setClickable(login_username,true);
+        setClickable(login_password,true);
+        setClickable(login_submit,true);
+        login_tip.innerHTML='登录状态：未登录！';
+        setClickable(login_goon,false);
+    }
+    eventBind(login_goon,'click',function(){
+        window.location.href='/index';
+    });
+    eventBind(login_submit,'click',function(){
+       //校验账号密码是否为空
+        if(login_username.value.length>0 && login_password.value.length>0){
+            var data = {
+                username:login_username.value,
+                password:login_password.value
+            };
+            //TODO
+//            ajax({
+//               url:'/login',
+//                type:'post',
+//                data:data,
+//
+//            });
+        }else{
+            alert('账号或密码不能为空！');
+        }
+    });
 
 </script>
 </html>
