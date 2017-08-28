@@ -13,8 +13,6 @@
 
     var video_name,video_url,canPlay;
 
-    //隐藏播放器
-    setClickable(play_btn,false);
     //检测按钮点击处理函数
     eventBind(test_btn,'click',function(){
         canPlay = false;
@@ -47,7 +45,6 @@
                 }
             });
            setClickable(test_btn,false);
-           setHide(player_container,false);
        } else{
            alert('请输入需要检测的视频文件名！');
            player_tip.innerHTML = '播放前请检测视频是否存在，如不存在则无法正常播放！';
@@ -61,7 +58,7 @@
             myPlayer.ready(function() {
                 this.src({
                     src: video_url,
-                    type: 'application/x-mpegURL',
+                    type: 'application/x-mpegURL'
                 });
                 this.play();
             });

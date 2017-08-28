@@ -52,6 +52,7 @@ function encryptFun(options,socket, callback) {
             .save(_outputPath)
             .on('end', function () {
                 socket.emit('encrypt-event',{msg:'Encrypt the ' + options.fileName + ' file OK!',type:1});
+                callback(null, 'Encrypt the ' + options.fileName + ' file OK!');
             })
             .on('stderr', function (stderrLine) {
                 console.log('Stderr output: ' + stderrLine);

@@ -21,8 +21,8 @@
             type:'POST',
             data:data,
             dataType:'json',
-            success:function(){
-
+            success:function(data){
+                console.log(data);
             },
             fail:function () {
                 console.log('视频加密POST请求失败！');

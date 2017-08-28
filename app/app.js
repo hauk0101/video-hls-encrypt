@@ -1,6 +1,5 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -37,19 +36,21 @@ app.use(session({
         maxAge:1000 * 60 * 60 * 24
     }
 }));
-//静态资源访问限制,
+//静态资源访问限制
 app.use(function (req, res, next) {
-    var static = /^(\/public|\/key)/g;//设置指定文件目录
     var suffix = /(\.key)$/g;//后缀格式指定
-    // if ((req.session.username != 'admin')
-    //     && (static.test(req.path) && suffix.test(req.path) )) {
-    //     console.log('用户未登录，不允许访问key文件');
-    //     return res.send('请求非法');
-    // }
-    // else {
-    //     console.log('当前用户已登录');
+    if ( suffix.test(req.path)) {
+        console.log(req.session.username,'++++请求key文件了');
+        if((req.session.username != 'admin')){
+            return res.send('请求非法');
+        }else{
+            console.log('+++++请求key文件了，并且已经登录，登录名为：',req.session.username);
+            next();
+        }
+    }
+    else {
         next();
-    // }
+    }
 });
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -64,7 +65,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
