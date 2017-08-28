@@ -29,12 +29,12 @@ app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     next();
 });
-//设置session
+//设置session,设置为1天有效
 app.use(session({
     name:'video-hls-encrypt',
     secret:'encrypt',
     cookie:{
-        maxAge:10 * 1000
+        maxAge:1000 * 60 * 60 * 24
     }
 }));
 //静态资源访问限制,

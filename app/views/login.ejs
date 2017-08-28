@@ -37,19 +37,13 @@
     var login_submit = document.getElementById('login-submit');
     var login_goon = document.getElementById('login-goon');
     var login_tip = document.getElementById('login-tip');
-    if(login_data.value != ""){
-        setClickable(login_username,false);
-        setClickable(login_password,false);
-        setClickable(login_submit,false);
-        login_tip.innerHTML='登录状态：已登录！';
-        setClickable(login_goon,true);
+
+    if(login_data.value !=""){
+        isLogined(true);
     }else{
-        setClickable(login_username,true);
-        setClickable(login_password,true);
-        setClickable(login_submit,true);
-        login_tip.innerHTML='登录状态：未登录！';
-        setClickable(login_goon,false);
+        isLogined(false);
     }
+
     eventBind(login_goon,'click',function(){
         window.location.href='/index';
     });
@@ -61,16 +55,45 @@
                 password:login_password.value
             };
             //TODO
-//            ajax({
-//               url:'/login',
-//                type:'post',
-//                data:data,
-//
-//            });
+            ajax({
+               url:'/login',
+                type:'post',
+                data:data,
+                dataType:'json',
+                success:function(data){
+                    if(data){
+                        data = JSON.parse(data);
+                        if(data.code == 0){
+                            isLogined(true);
+                        }
+                    }else{
+                        isLogined(false);
+                    }
+                },
+                fail:function(){
+
+                }
+            });
         }else{
             alert('账号或密码不能为空！');
         }
     });
+
+    function isLogined(bool){
+        if(bool){
+            setClickable(login_username,false);
+            setClickable(login_password,false);
+            setClickable(login_submit,false);
+            login_tip.innerHTML='登录状态：已登录！';
+            setClickable(login_goon,true);
+        }else{
+            setClickable(login_username,true);
+            setClickable(login_password,true);
+            setClickable(login_submit,true);
+            login_tip.innerHTML='登录状态：未登录！';
+            setClickable(login_goon,false);
+        }
+    }
 
 </script>
 </html>
