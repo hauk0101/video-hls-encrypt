@@ -115,3 +115,7 @@ _以下的内容均为个人观点，仅供参考_
 　
  
 　　而如何将视频源文件转化为对应的加密后的文件，可以更多的研究开源库`FFmpeg`的使用，甚至如果没有迫切需求，可以考虑使用第三方视频云服务商的相关解决方案。至于客户端的视频解密，也可以研究`video.js`相关的内容。
+
+## 浏览知识共享许可协议
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a>进行许可。
