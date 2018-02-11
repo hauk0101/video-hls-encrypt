@@ -34,7 +34,7 @@
 
 > 项目原理图示
 
-// TODO
+![项目原理图](docs/images/schematic-diagram.png)
 
 
 #### 技术栈
