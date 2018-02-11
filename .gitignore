@@ -3,4 +3,4 @@
 app/node_modules/
 test/.*
 app/public/images/
-app/public/videos/.*
+app/public/videos/
