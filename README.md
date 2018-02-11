@@ -95,8 +95,85 @@ video-hls-encrypt/                   .............................. hls视频加
 
 > 源码简析
 
-// TODO
+* 简单的权限判断，app.js中：
+    * express的中间件
+    * 判断请求的后缀
+    * 判断session中是否有用户名，有则允许访问 .key文件；没有则禁止访问 
+    * 主要是保护.key文件，可以加入其它的权限手段，比如token、session有效时长等等
+```
+//静态资源访问限制
+app.use(function (req, res, next) {
+    var suffix = /(\.key)$/g;//后缀格式指定
+    if ( suffix.test(req.path)) {
+        console.log(req.session.username,'++++请求key文件了');
+        if((req.session.username != 'admin')){
+            return res.send('请求非法');
+        }else{
+            console.log('+++++请求key文件了，并且已经登录，登录名为：',req.session.username);
+            next();
+        }
+    }
+    else {
+        next();
+    }
+});
+```
 
+* 利用FFmpeg对视频进行加密、切片处理，在encrypt.js中： 
+    * 利用了FFmpeg的切片和加密方法
+    * 建议可以深入研究FFmpeg框架的相关api
+    * 可以根据实际业务来对视频进行更符合要求的切片处理
+```
+/**
+ * 加密处理方法
+ * @param options 加密数据的相关参数
+ * @param socket socket输出
+ * @param callback 回调函数
+ */
+function encryptFun(options,socket, callback) {
+    var _name = options.fileName.split('.')[0];
+    var _type = options.fileName.split('.')[1];
+    var _encryptPath = options.encryptPath + '/' + _name;
+    var _videoPath = options.noencryptPath + '/' + options.fileName;
+    var _keyInfoPath = './public/key/key_info.key';
+    var _outputPath = _encryptPath + '/playlist.m3u8';
+    console.log('begin encrypt Fun');
+    if (_type == 'mp4') {
+        ffmpegCommand(_videoPath)
+            .addOption('-hls_time', '10')   //设置每个片段的长度
+            .addOption('-hls_key_info_file', _keyInfoPath)
+            .save(_outputPath)
+            .on('end', function () {
+                socket.emit('encrypt-event',{msg:'Encrypt the ' + options.fileName + ' file OK!',type:1});
+                callback(null, 'Encrypt the ' + options.fileName + ' file OK!');
+            })
+            .on('stderr', function (stderrLine) {
+                console.log('Stderr output: ' + stderrLine);
+                socket.emit('encrypt-event',{msg:stderrLine});
+            })
+            .on('error', function (err, stdout, stderr) {
+                console.log('Cannot process video: ' + err.message);
+                socket.emit('encrypt-event',{msg:err.message});
+                callback(err, err.message);
+            });
+    }
+    else{
+        callback('type err','file type is not mp4.');
+    }
+}
+```
+
+* 视频播放相关逻辑，player.ejs中：
+    * 使用了videojs作为播放器插件
+    * 使用了videojs-contrib-hls作为切片流解码插件
+    * 具体的逻辑代码在player.js中
+
+```
+<script src="javascripts/utils.js"></script>
+<script src="libs/videojs/video.min.js"></script>
+<script src="libs/videojs-contrib-hls/videojs-contrib-hls.js"></script>
+<script src="javascripts/player.js"></script>
+```
 #### 建议
 
 * 本项目更多的价值在于展示出一整套的加密原理，同时为了证明这套原理的可行性，做的比较简单的示例。
